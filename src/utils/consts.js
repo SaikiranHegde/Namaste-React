@@ -36,5 +36,16 @@ export const RestaurantData = [
     rating: 4.1,
     eta: "30 - 45 mins",
   },
+  {
+    id: 5,
+    name: "KFC",
+    image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/wwbhls455g2syydrkmvo",
+    cuisines: "American, Burgers, Snacks",
+    rating: 4,
+    eta: "30 -35 mins"
+  }
 ];
 
+// Swiggy API
+export const FETCH_MENU_URL =
+  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9698196&lng=77.7499721";

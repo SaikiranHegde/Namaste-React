@@ -4,8 +4,8 @@ import { defaultTo } from "ramda";
 const RestaurantCard = (props) => {
   return (
     <section className="rest-card" style={{
-      width: '250px',
-      height: '250px',
+      width: '220px',
+      height: '280px',
     }}>
       <img alt={props.restData?.name} className="rest-img" src={props.restData?.image} />
       <div className="rest-name">{defaultTo('Asha Tiffins', props.restData.name)}</div>
