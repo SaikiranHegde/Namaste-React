@@ -4,11 +4,13 @@ import { FETCH_MENU_URL, RestaurantData } from "../utils/consts";
 import { useEffect, useState } from "react";
 import { Flex, Spin, Skeleton  } from 'antd';
 import { isNotNullOrEmpty, isNilOrEmpty } from "../utils/util";
+import { delay, of } from "rxjs";
 
 const Body = () => {
   // Stateful value and a function to update it
   const [restData, setRestData] = useState();
 
+  // Using Promise
   const fetchRestaurantData = async () => {
     // const data = await fetch(FETCH_MENU_URL);
     // const json = await data.json();
@@ -20,9 +22,19 @@ const Body = () => {
   }
 
   useEffect(() => {
-    fetchRestaurantData();
+    // fetchRestaurantData();
+
+    // Using RxJS
+    const subscription = of(RestaurantData)
+      .pipe(
+        delay(1500))
+      .subscribe((data) => {
+        setRestData(data);
+      });
+    return () => subscription.unsubscribe();
   });
 
+  // Conditional rendering
   if (isNilOrEmpty(restData)) {
     return <Flex align="center" justify="center" gap="middle">
       <Spin size="large"/>
