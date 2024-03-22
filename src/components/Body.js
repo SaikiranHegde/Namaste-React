@@ -40,7 +40,7 @@ const Body = () => {
     return function unsub() {
       subscription.unsubscribe();
     };
-  }, []);
+  }, []); // [restData] -> Dependency array with variable
 
   // Conditional rendering
   if (isNilOrEmpty(restData)) {
