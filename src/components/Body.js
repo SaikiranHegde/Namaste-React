@@ -1,25 +1,30 @@
 import RestaurantCard from "./RestaurantCard";
-import { map, filter, gte } from "ramda";
+import { map, filter, gte, includes, toLower } from "ramda";
 import { FETCH_MENU_URL, RestaurantData } from "../utils/consts";
 import { useEffect, useState } from "react";
 import { Flex, Spin, Skeleton  } from 'antd';
 import { isNotNullOrEmpty, isNilOrEmpty } from "../utils/util";
 import { delay, of } from "rxjs";
+import { Input } from 'antd';
+const { Search } = Input;
 
 const Body = () => {
   // Stateful value and a function to update it
   const [restData, setRestData] = useState();
+  const [filteredRestData, setFilteredRestData] = useState();
+  const [searchText, setSearchText] = useState();
 
   // Using Promise
   const fetchRestaurantData = async () => {
     // const data = await fetch(FETCH_MENU_URL);
     // const json = await data.json();
+    // use RxJS fromFetch and try the same
 
     const data = await Promise.resolve(RestaurantData);
     setTimeout(() => {
       setRestData(data);
     }, 1500);
-  }
+  };
 
   useEffect(() => {
     // fetchRestaurantData();
@@ -30,9 +35,12 @@ const Body = () => {
         delay(1500))
       .subscribe((data) => {
         setRestData(data);
+        setFilteredRestData(data);
       });
-    return () => subscription.unsubscribe();
-  });
+    return function unsub() {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   // Conditional rendering
   if (isNilOrEmpty(restData)) {
@@ -42,12 +50,18 @@ const Body = () => {
     </Flex>;
   }
 
+  const onSearch = (value) => {
+    setSearchText(value);
+    setFilteredRestData(filter((rest) => includes(toLower(value), toLower(rest?.name)), restData));
+  };
+
   // Body component
   return (
     < section className="content-container">
       <div className="filter">
+        <Search placeholder="Search Restaurants" defaultValue={searchText} onSearch={onSearch} enterButton />
         <button className="filter-btn" onClick={() => {
-          setRestData(filter((rest) => gte(rest?.rating, 4), restData));
+          setFilteredRestData(filter((rest) => gte(rest?.rating, 4), restData));
         }}>Top Rated Restaurants</button>
       </div>
       <div className="rest-container">
@@ -55,7 +69,7 @@ const Body = () => {
           (restData) => (
             <RestaurantCard restData={restData} key={restData.id} />
           ),
-          restData
+          filteredRestData
         )}
       </div>
     </section>
