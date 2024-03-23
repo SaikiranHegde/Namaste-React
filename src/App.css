@@ -11,6 +11,14 @@
   cursor: pointer;
 }
 
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.color-inherit {
+  color: inherit;
+}
+
 .app-container {
   padding: 20px;
   font-family: "Open Sans", sans-serif;
@@ -71,12 +79,12 @@
   border: 1px solid #000;
 }
 
-.rest-card > .rest-info {
+.rest-info {
   font-size: 12px;
   font-weight: 500;
 }
 
-.rest-card > .rest-name {
+.rest-name {
   font-size: 16px;
   font-weight: 600;
 }

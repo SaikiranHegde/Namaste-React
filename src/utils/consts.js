@@ -1,5 +1,5 @@
 // Mock Data
-export const RestaurantData = [
+export const restaurantData = [
   {
     id: 1,
     name: "Asha Tiffins",
@@ -49,3 +49,40 @@ export const RestaurantData = [
 // Swiggy API
 export const FETCH_MENU_URL =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9698196&lng=77.7499721";
+
+export const individualRestaurantData = [
+  {
+    id: 1,
+    name: "Asha Tiffins",
+    cuisines: "South Indian, North Indian, Chinese",
+    menu: [
+      {
+        id: 1,
+        name: "Masala Dosa",
+        price: 80
+      },
+      {
+        id: 2,
+        name: "Idli Vada",
+        price: 110
+      },
+      {
+        id: 3,
+        name: "Poori Saagu",
+        price: 80
+      },
+      {
+        id: 4,
+        name: "Chole Bature",
+        price: 120
+      },
+      {
+        id: 5,
+        name: "Paani Puri",
+        price: 60
+      }
+    ]
+  }
+];
+
+// https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/hpncnz3sfv3gigsukkts - Image for Menu

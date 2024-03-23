@@ -1,11 +1,12 @@
 import RestaurantCard from "./RestaurantCard";
 import { map, filter, gte, includes, toLower } from "ramda";
-import { FETCH_MENU_URL, RestaurantData } from "../utils/consts";
+import { FETCH_MENU_URL, restaurantData } from "../utils/consts";
 import { useEffect, useState } from "react";
 import { Flex, Spin, Skeleton  } from 'antd';
 import { isNotNullOrEmpty, isNilOrEmpty } from "../utils/util";
 import { delay, of } from "rxjs";
 import { Input } from 'antd';
+import { Link } from "react-router-dom";
 const { Search } = Input;
 
 const Body = () => {
@@ -20,7 +21,7 @@ const Body = () => {
     // const json = await data.json();
     // use RxJS fromFetch and try the same
 
-    const data = await Promise.resolve(RestaurantData);
+    const data = await Promise.resolve(restaurantData);
     setTimeout(() => {
       setRestData(data);
     }, 1500);
@@ -30,7 +31,7 @@ const Body = () => {
     // fetchRestaurantData();
 
     // Using RxJS
-    const subscription = of(RestaurantData)
+    const subscription = of(restaurantData)
       .pipe(
         delay(1500))
       .subscribe((data) => {
@@ -67,7 +68,9 @@ const Body = () => {
       <div className="rest-container">
         {map(
           (restData) => (
-            <RestaurantCard restData={restData} key={restData.id} />
+            <Link className='text-decoration-none color-inherit' key={restData.id} to={`/restaurant/1`}>
+              <RestaurantCard restData={restData} />
+            </Link>
           ),
           filteredRestData
         )}
