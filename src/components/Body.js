@@ -38,6 +38,8 @@ const Body = () => {
         setRestData(data);
         setFilteredRestData(data);
       });
+
+    // Called when component unmounts
     return function unsub() {
       subscription.unsubscribe();
     };

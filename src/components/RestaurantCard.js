@@ -1,6 +1,7 @@
 import { defaultTo } from "ramda";
 
 // Inline CSS
+// Presentational Component
 const RestaurantCard = (props) => {
   return (
     <section className="rest-card" style={{

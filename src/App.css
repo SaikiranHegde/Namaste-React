@@ -19,6 +19,16 @@
   color: inherit;
 }
 
+.header-1 {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.header-2 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .app-container {
   padding: 20px;
   font-family: "Open Sans", sans-serif;
