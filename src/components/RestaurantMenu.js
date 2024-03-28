@@ -4,7 +4,7 @@ import { delay, of } from "rxjs";
 import { useParams } from "react-router-dom";
 import { find, map, propEq } from "ramda";
 import { isNilOrEmpty } from "../utils/util";
-import { Flex, Spin } from "antd";
+import Loader from "./Loader";
 
 const RestaurantMenu = () => {
   const [selectedRestData, setSelectedRestData] = useState();
@@ -26,9 +26,7 @@ const RestaurantMenu = () => {
   }, []);
 
   if (isNilOrEmpty(selectedRestData)) {
-    return <Flex align="center" justify="center" gap="middle">
-      <Spin size="large"/>
-    </Flex>;
+    return <Loader />;
   }
 
   return (

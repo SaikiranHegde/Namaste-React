@@ -2,11 +2,12 @@ import RestaurantCard from "./RestaurantCard";
 import { map, filter, gte, includes, toLower } from "ramda";
 import { FETCH_MENU_URL, restaurantData } from "../utils/consts";
 import { useEffect, useState } from "react";
-import { Flex, Spin, Skeleton  } from 'antd';
 import { isNotNullOrEmpty, isNilOrEmpty } from "../utils/util";
 import { delay, of } from "rxjs";
 import { Input } from 'antd';
 import { Link } from "react-router-dom";
+import { useAppOnline } from "../utils/useAppOnline";
+import Loader from "./Loader";
 const { Search } = Input;
 
 const Body = () => {
@@ -32,8 +33,7 @@ const Body = () => {
 
     // Using RxJS
     const subscription = of(restaurantData)
-      .pipe(
-        delay(1500))
+      .pipe(delay(1500))
       .subscribe((data) => {
         setRestData(data);
         setFilteredRestData(data);
@@ -45,40 +45,66 @@ const Body = () => {
     };
   }, []); // [restData] -> Dependency array with variable
 
+  // useAppOnline custom hook
+  const appOnline = useAppOnline();
+
   // Conditional rendering
   if (isNilOrEmpty(restData)) {
-    return <Flex align="center" justify="center" gap="middle">
-      <Spin size="large"/>
-      {/* <Skeleton active /> */}
-    </Flex>;
+    return <Loader />
   }
 
   const onSearch = (value) => {
     setSearchText(value);
-    setFilteredRestData(filter((rest) => includes(toLower(value), toLower(rest?.name)), restData));
+    setFilteredRestData(
+      filter((rest) => includes(toLower(value), toLower(rest?.name)), restData)
+    );
   };
 
-  // Body component
-  return (
-    < section className="content-container">
-      <div className="filter">
-        <Search placeholder="Search Restaurants" defaultValue={searchText} onSearch={onSearch} enterButton />
-        <button className="filter-btn" onClick={() => {
-          setFilteredRestData(filter((rest) => gte(rest?.rating, 4), restData));
-        }}>Top Rated Restaurants</button>
+  if (appOnline) {
+    // Body component
+    return (
+      <section className="content-container">
+        <div className="filter">
+          <Search
+            placeholder="Search Restaurants"
+            defaultValue={searchText}
+            onSearch={onSearch}
+            enterButton
+          />
+          <button
+            className="filter-btn"
+            onClick={() => {
+              setFilteredRestData(
+                filter((rest) => gte(rest?.rating, 4), restData)
+              );
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
+        <div className="rest-container">
+          {map(
+            (restData) => (
+              <Link
+                className="text-decoration-none color-inherit"
+                key={restData.id}
+                to={`/restaurant/1`}
+              >
+                <RestaurantCard restData={restData} />
+              </Link>
+            ),
+            filteredRestData
+          )}
+        </div>
+      </section>
+    );
+  } else {
+    return (
+      <div className="header-2">
+        Looks like you are offline. Please check your internet connection!!
       </div>
-      <div className="rest-container">
-        {map(
-          (restData) => (
-            <Link className='text-decoration-none color-inherit' key={restData.id} to={`/restaurant/1`}>
-              <RestaurantCard restData={restData} />
-            </Link>
-          ),
-          filteredRestData
-        )}
-      </div>
-    </section>
-  );
-}
+    );
+  }
+};
 
 export default Body;  

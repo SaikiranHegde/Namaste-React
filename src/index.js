@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,8 +8,11 @@ import Contact from './components/Contact';
 import ErrorPage from './components/ErrorPage';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
+import Loader from './components/Loader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const CartLazy = lazy(() => import('./components/Cart'));
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +34,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurantMenu />
+      },
+      {
+        path: "/cart",
+        element: <Suspense fallback={<Loader />}><CartLazy /></Suspense>,
       }
     ],
     errorElement: <ErrorPage />,

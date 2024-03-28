@@ -19,7 +19,7 @@ const Header = () => {
       <div className="nav-items">
         <Link to="/about" className='cursor-pointer text-decoration-none color-inherit'>About Us</Link>
         <Link to="/contact-us" className='cursor-pointer text-decoration-none color-inherit'>Contact Us</Link>
-        <div className="cursor-pointer">Cart</div>
+        <Link to="/cart" className='cursor-pointer text-decoration-none color-inherit'>Cart</Link>
         <Button type="dashed" onClick={toggleBtnName}>
           {btnName}
         </Button>
