@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { map, filter, gte, includes, toLower } from "ramda";
 import { FETCH_MENU_URL, restaurantData } from "../utils/consts";
 import { useEffect, useState } from "react";
@@ -60,6 +60,8 @@ const Body = () => {
     );
   };
 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
   if (appOnline) {
     // Body component
     return (
@@ -90,7 +92,7 @@ const Body = () => {
                 key={restData.id}
                 to={`/restaurant/1`}
               >
-                <RestaurantCard restData={restData} />
+                { restData.promoted ? <RestaurantCardPromoted restData={restData} /> : <RestaurantCard restData={restData} /> }
               </Link>
             ),
             filteredRestData

@@ -8,6 +8,7 @@ export const restaurantData = [
     cuisines: "South Indian, North Indian, Chinese",
     rating: 4.5,
     eta: "15 - 20 mins",
+    promoted: false
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ export const restaurantData = [
     cuisines: "South Indian, North Indian, Chats",
     rating: 4.0,
     eta: "20 - 25 mins",
+    promoted: false
   },
   {
     id: 3,
@@ -26,6 +28,7 @@ export const restaurantData = [
     cuisines: "South Indian, North Indian, Deserts",
     rating: 3.9,
     eta: "30 - 45 mins",
+    promoted: true
   },
   {
     id: 4,
@@ -35,6 +38,7 @@ export const restaurantData = [
     cuisines: "Burgers, Beverages",
     rating: 4.1,
     eta: "30 - 45 mins",
+    promoted: false
   },
   {
     id: 5,
@@ -42,7 +46,8 @@ export const restaurantData = [
     image: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/wwbhls455g2syydrkmvo",
     cuisines: "American, Burgers, Snacks",
     rating: 4,
-    eta: "30 -35 mins"
+    eta: "30 -35 mins",
+    promoted: false
   }
 ];
 
