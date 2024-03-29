@@ -3,9 +3,6 @@
   <weight>: Use a value from 300 to 800
   */
 
-* {
-  box-sizing: border-box;
-}
 
 .cursor-pointer {
   cursor: pointer;

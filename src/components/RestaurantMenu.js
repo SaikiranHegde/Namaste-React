@@ -23,7 +23,7 @@ const RestaurantMenu = () => {
       return function unsub() {
         sub.unsubscribe();
       };
-  }, []);
+  }, [id]);
 
   if (isNilOrEmpty(selectedRestData)) {
     return <Loader />;
