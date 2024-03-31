@@ -1,11 +1,12 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class User extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      count: 0
+      count: 0,
     };
 
     // Update state in class based component
@@ -25,12 +26,15 @@ class User extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    return ( 
+    return (
       <section>
         <div className="header-2">Name: {this.props.name}</div>
         <div>Location: {this.props.location}</div>
         <div>Contact: {this.props.contact}</div>
         <div>Count: {this.state.count}</div>
+        <UserContext.Consumer>
+          {({ userName }) => (<div className="text-blue-700">{userName}</div>)}
+        </UserContext.Consumer>
       </section>
     );
   }

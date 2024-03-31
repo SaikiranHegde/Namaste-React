@@ -16,6 +16,9 @@ const Body = () => {
   const [filteredRestData, setFilteredRestData] = useState();
   const [searchText, setSearchText] = useState();
 
+  // showIndex state variable will be updated in Child component using setShowIndex
+  const [showIndex, setShowIndex] = useState(0);
+
   // Using Promise
   const fetchRestaurantData = async () => {
     // const data = await fetch(FETCH_MENU_URL);
@@ -92,7 +95,9 @@ const Body = () => {
                 key={restData.id}
                 to={`/restaurant/1`}
               >
-                { restData.promoted ? <RestaurantCardPromoted restData={restData} /> : <RestaurantCard restData={restData} /> }
+                {/* { restData.promoted ? <RestaurantCardPromoted restData={restData} /> : <RestaurantCard restData={restData} /> } */}
+                {/* Pass setShowIndex, so that we can use it to set showIndex from RestaurantCard */}
+                { <RestaurantCard restData={restData}  setShowIndex={() => setShowIndex(restData.id)}/> }
               </Link>
             ),
             filteredRestData

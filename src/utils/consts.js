@@ -60,33 +60,37 @@ export const individualRestaurantData = [
     id: 1,
     name: "Asha Tiffins",
     cuisines: "South Indian, North Indian, Chinese",
-    menu: [
-      {
-        id: 1,
-        name: "Masala Dosa",
-        price: 80
-      },
-      {
-        id: 2,
-        name: "Idli Vada",
-        price: 110
-      },
-      {
-        id: 3,
-        name: "Poori Saagu",
-        price: 80
-      },
-      {
-        id: 4,
-        name: "Chole Bature",
-        price: 120
-      },
-      {
-        id: 5,
-        name: "Paani Puri",
-        price: 60
-      }
-    ]
+    menu: {
+      recommended: [
+        {
+          id: 4,
+          name: "Chole Bature",
+          price: 120
+        },
+        {
+          id: 5,
+          name: "Paani Puri",
+          price: 60
+        }
+      ],
+      popular: [
+        {
+          id: 1,
+          name: "Masala Dosa",
+          price: 80
+        },
+        {
+          id: 2,
+          name: "Idli Vada",
+          price: 110
+        },
+        {
+          id: 3,
+          name: "Poori Saagu",
+          price: 80
+        }
+      ]
+    }
   }
 ];
 

@@ -30,18 +30,32 @@ const RestaurantMenu = () => {
   }
 
   return (
-    <section>
-      <div className="rest-name">{selectedRestData.name}</div>
-      <div className="rest-info">{selectedRestData.cuisines}</div>
-      <div className="menu-container">
-        {map(
-          (menu) => (
-            <div className="rest-info" key={menu.id}>
-              {menu.name} - Rs.{menu.price}
-            </div>
-          ),
-          selectedRestData?.menu
-        )}
+    <section className="flex justify-center">
+      <div>
+        <div className="text-lg font-semibold">{selectedRestData.name}</div>
+        <div className="text-xs">{selectedRestData.cuisines}</div>
+        <div className="mt-3">
+          <div className="text-base font-medium">Recommended</div>
+          {map(
+            (menu) => (
+              <div className="rest-info" key={menu.id}>
+                {menu.name} - Rs.{menu.price}
+              </div>
+            ),
+            selectedRestData?.menu.recommended
+          )}
+        </div>
+        <div className="mt-3">
+          <div className="text-base font-medium">Popular</div>
+          {map(
+            (menu) => (
+              <div className="rest-info" key={menu.id}>
+                {menu.name} - Rs.{menu.price}
+              </div>
+            ),
+            selectedRestData?.menu.popular
+          )}
+        </div>
       </div>
     </section>
   );
