@@ -9,10 +9,11 @@ import ErrorPage from './components/ErrorPage';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
 import Loader from './components/Loader';
+import Cart from './components/Cart';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const CartLazy = lazy(() => import('./components/Cart'));
+const InstamartLazy = lazy(() => import('./components/Instamart'));
 
 const appRouter = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Suspense fallback={<Loader />}><CartLazy /></Suspense>,
+        element: <Cart />
+      },
+      {
+        path: "/instamart",
+        element: <Suspense fallback={<Loader />}><InstamartLazy /></Suspense>,
       }
     ],
     errorElement: <ErrorPage />,
