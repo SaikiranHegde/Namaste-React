@@ -1,29 +1,31 @@
+import React from "react";
 import { useContext, useState } from 'react';
-import appLogo from '../assests/app-logo.svg';
+import { ReactComponent as AppLogo } from '../assets/app-logo.svg';
 import { Button } from 'antd';
 import { equals } from 'ramda';
 import { Link } from "react-router-dom";
 import UserContext from '../utils/UserContext';
 import { useSelector } from 'react-redux';
+import { AppState } from "../utils/appStore";
 
-const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
+const Header: React.FC = () => {
+  const [btnName, setBtnName] = useState<string>("Login");
 
   // User context data
   const { userName, setUserName } = useContext(UserContext);
 
   // Subscribe to Store and access Cart Slice
-  const cartItems = useSelector((store) => store.cart.items);
+  const cartItems = useSelector((store: AppState) => store.cart.items);
 
   const toggleBtnName = () => {
     setBtnName(equals(btnName, "Login") ? "Logout" : "Login");
-    setUserName("Saikiran Hegde");
+    setUserName!("Saikiran Hegde");
   }
 
   return (
     <section className="header-container">
       <div className="logo-container cursor-pointer">
-        <Link to="/" className='text-decoration-none color-inherit'><img src={appLogo} alt="logo" className="app-logo" /></Link>
+        <Link to="/" className='text-decoration-none color-inherit'><AppLogo className="app-logo" /></Link>
       </div>
       <div className="nav-items">
         <Link to="/about" className='cursor-pointer text-decoration-none color-inherit'>About Us</Link>

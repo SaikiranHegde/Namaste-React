@@ -1,3 +1,4 @@
+import React from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { map, filter, gte, includes, toLower } from "ramda";
 import { FETCH_MENU_URL, restaurantData } from "../utils/consts";
@@ -8,16 +9,17 @@ import { Input } from 'antd';
 import { Link } from "react-router-dom";
 import { useAppOnline } from "../utils/useAppOnline";
 import Loader from "./Loader";
+import { RestaurantData } from "../types/types";
 const { Search } = Input;
 
-const Body = () => {
+const Body: React.FC = () => {
   // Stateful value and a function to update it
-  const [restData, setRestData] = useState();
-  const [filteredRestData, setFilteredRestData] = useState();
-  const [searchText, setSearchText] = useState();
+  const [restData, setRestData] = useState<RestaurantData[]>([]);
+  const [filteredRestData, setFilteredRestData] = useState<RestaurantData[]>([]);;
+  const [searchText, setSearchText] = useState<string>();
 
   // showIndex state variable will be updated in Child component using setShowIndex
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState<number>(0);
 
   // Using Promise
   const fetchRestaurantData = async () => {
@@ -37,7 +39,7 @@ const Body = () => {
     // Using RxJS
     const subscription = of(restaurantData)
       .pipe(delay(1500))
-      .subscribe((data) => {
+      .subscribe((data: RestaurantData[]) => {
         setRestData(data);
         setFilteredRestData(data);
       });
@@ -56,7 +58,7 @@ const Body = () => {
     return <Loader />
   }
 
-  const onSearch = (value) => {
+  const onSearch = (value: string) => {
     setSearchText(value);
     setFilteredRestData(
       filter((rest) => includes(toLower(value), toLower(rest?.name)), restData)
@@ -88,20 +90,22 @@ const Body = () => {
           </button>
         </div>
         <div className="rest-container">
-          {map(
-            (restData) => (
-              <Link
-                className="text-decoration-none color-inherit"
-                key={restData.id}
-                to={`/restaurant/1`}
-              >
-                {/* { restData.promoted ? <RestaurantCardPromoted restData={restData} /> : <RestaurantCard restData={restData} /> } */}
-                {/* Pass setShowIndex, so that we can use it to set showIndex from RestaurantCard */}
-                { <RestaurantCard restData={restData}  setShowIndex={() => setShowIndex(restData.id)}/> }
-              </Link>
-            ),
-            filteredRestData
-          )}
+          {filteredRestData?.map((restData: RestaurantData) => (
+            <Link
+              className="text-decoration-none color-inherit"
+              key={restData.id}
+              to={`/restaurant/1`}
+            >
+              {/* { restData.promoted ? <RestaurantCardPromoted restData={restData} /> : <RestaurantCard restData={restData} /> } */}
+              {/* Pass setShowIndex, so that we can use it to set showIndex from RestaurantCard */}
+              {
+                <RestaurantCard
+                  restData={restData}
+                  setShowIndex={() => setShowIndex(restData.id)}
+                />
+              }
+            </Link>
+          ))}
         </div>
       </section>
     );

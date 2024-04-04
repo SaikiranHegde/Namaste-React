@@ -1,12 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CartState, SubMenu } from "../types/types";
+
+const initialState: CartState = {
+  items: []
+};
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    items: [],
-  },
+  initialState,
   reducers: {
-    addItem: (state, action) => {
+    addItem: (state, action: PayloadAction<SubMenu>) => {
       // RTX internally uses ImmerJS
       state.items.push(action.payload);
     },

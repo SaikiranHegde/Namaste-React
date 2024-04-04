@@ -11,7 +11,7 @@ import RestaurantMenu from './components/RestaurantMenu';
 import Loader from './components/Loader';
 import Cart from './components/Cart';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const InstamartLazy = lazy(() => import('./components/Instamart'));
 

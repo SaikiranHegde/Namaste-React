@@ -1,8 +1,9 @@
 import React from "react";
 import UserContext from "../utils/UserContext";
+import { UserProps, UserState } from "../types/user";
 
-class User extends React.Component {
-  constructor(props) {
+class User extends React.Component<UserProps, UserState> {
+  constructor(props: UserProps) {
     super(props);
 
     this.state = {
@@ -18,8 +19,8 @@ class User extends React.Component {
   }
 
   // Old way of writing, without useEffect hook
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.count !== prevState.count) {
+  componentDidUpdate(prevProps: UserProps, prevState: UserState) {
+    if (this.state?.count !== prevState.count) {
       // post state updates
     }
   }

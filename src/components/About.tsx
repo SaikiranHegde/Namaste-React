@@ -1,6 +1,7 @@
+import React from "react";
 import User from "./User";
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <section>
       <div className="header-1">About</div>

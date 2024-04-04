@@ -7,4 +7,6 @@ const appStore = configureStore({
   }
 });
 
+export type AppState = ReturnType<typeof appStore.getState>
+
 export default appStore;

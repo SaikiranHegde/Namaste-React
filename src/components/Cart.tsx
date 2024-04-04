@@ -1,10 +1,13 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 import { map } from "ramda";
 import { isNilOrEmpty, isNotNullOrEmpty } from "../utils/util";
+import { AppState } from "../utils/appStore";
+import { SubMenu } from "../types/types";
 
-const Cart = () => {
-  const cartItems = useSelector((store) => store.cart.items);
+const Cart: React.FC = () => {
+  const cartItems = useSelector((store: AppState) => store.cart.items);
   const dispatch = useDispatch();
 
   const onClearCartClick = () => {
@@ -26,17 +29,14 @@ const Cart = () => {
         </div>
       )}
       {isNotNullOrEmpty(cartItems) &&
-        map(
-          (menu) => (
-            <div
+        cartItems?.map((menu: SubMenu) => (
+          <div
               className="rest-info w-max p-4 border border-solid border-gray-600 bg-white rounded"
               key={menu.id}
             >
               {menu.name} - Rs.{menu.price}
             </div>
-          ),
-          cartItems
-        )}
+        ))}
       {isNilOrEmpty(cartItems) && (
         <div className="text-base">Cart is empty</div>
       )}

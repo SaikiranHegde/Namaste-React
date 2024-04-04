@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Header from "./components/Header";
 import { Outlet } from "react-router-dom";
@@ -6,14 +7,14 @@ import { useState } from "react";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
-    <section></section>
+    <section>Footer</section>
   );
 }
 
-const App = () => {
-  const [userName, setUserName] = useState("Saikiran");
+const App: React.FC = () => {
+  const [userName, setUserName] = useState<string>("Saikiran");
 
   return (
     <Provider store={appStore}>
@@ -21,7 +22,7 @@ const App = () => {
         <section className="app-container">
           <Header />
           <Outlet />
-          <Footer />
+          {/* <Footer /> */}
         </section>
       </UserContext.Provider>
     </Provider>

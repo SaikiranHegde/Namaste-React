@@ -1,8 +1,10 @@
+import React from "react";
 import { defaultTo } from "ramda";
+import { RestaurantCardProps } from "../types/types";
 
 // Inline CSS
 // Presentational Component
-const RestaurantCard = ({ restData, setShowIndex }) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ restData, setShowIndex }) => {
   return (
     <section className="rest-card" style={{
       width: '220px',
@@ -19,8 +21,8 @@ const RestaurantCard = ({ restData, setShowIndex }) => {
 }
 
 // Higher Order Component
-export const withPromotedLabel = (RestaurantCard) => {
-  return ({ restData }) => {
+export const withPromotedLabel = (RestaurantCard: any) => {
+  return ({ restData }: RestaurantCardProps) => {
     return (
       <section>
         <div className="text-xs w-max bg-gray-400 p-1 rounded-sm absolute mt-[2px] ml-[2px]">Promoted</div>
