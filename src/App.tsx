@@ -6,6 +6,7 @@ import UserContext from "./utils/UserContext";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import LoginButtonContext from "./utils/LoginButtonContext";
 
 const Footer: React.FC = () => {
   return (
@@ -14,16 +15,19 @@ const Footer: React.FC = () => {
 }
 
 const App: React.FC = () => {
-  const [userName, setUserName] = useState<string>("Saikiran");
+  const [userName, setUserName] = useState<string>("");
+  const [loginButton, setLoginButton] = useState<string>("Login");
 
   return (
     <Provider store={appStore}>
       <UserContext.Provider value={{ userName, setUserName }}>
-        <section className="app-container">
-          <Header />
-          <Outlet />
-          {/* <Footer /> */}
-        </section>
+        <LoginButtonContext.Provider value={{ loginButton, setLoginButton }}>
+          <section className="app-container">
+            <Header />
+            <Outlet />
+            {/* <Footer /> */}
+          </section>
+        </LoginButtonContext.Provider>
       </UserContext.Provider>
     </Provider>
   );

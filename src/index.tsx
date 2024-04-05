@@ -10,6 +10,7 @@ import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
 import Loader from './components/Loader';
 import Cart from './components/Cart';
+import Login from './components/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -43,6 +44,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: <Suspense fallback={<Loader />}><InstamartLazy /></Suspense>,
+      },
+      {
+        path: "/login",
+        element: <Login />
       }
     ],
     errorElement: <ErrorPage />,

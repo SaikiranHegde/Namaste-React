@@ -2,24 +2,32 @@ import React from "react";
 import { useContext, useState } from 'react';
 import { ReactComponent as AppLogo } from '../assets/app-logo.svg';
 import { Button } from 'antd';
-import { equals } from 'ramda';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from '../utils/UserContext';
 import { useSelector } from 'react-redux';
 import { AppState } from "../utils/appStore";
+import { isNotNullOrEmpty } from "../utils/util";
+import LoginButtonContext from "../utils/LoginButtonContext";
 
 const Header: React.FC = () => {
-  const [btnName, setBtnName] = useState<string>("Login");
-
   // User context data
   const { userName, setUserName } = useContext(UserContext);
+
+  const { loginButton, setLoginButton } = useContext(LoginButtonContext);
 
   // Subscribe to Store and access Cart Slice
   const cartItems = useSelector((store: AppState) => store.cart.items);
 
+  const navigate = useNavigate();
+
   const toggleBtnName = () => {
-    setBtnName(equals(btnName, "Login") ? "Logout" : "Login");
-    setUserName!("Saikiran Hegde");
+    // setBtnName(isNotNullOrEmpty(userName) ? "Logout" : "Login");
+    if (isNotNullOrEmpty(userName)) {
+      setUserName!("");
+      setLoginButton!("Login");
+    } else {
+      navigate("/login");
+    }
   }
 
   return (
@@ -32,9 +40,9 @@ const Header: React.FC = () => {
         <Link to="/contact-us" className='cursor-pointer text-decoration-none color-inherit'>Contact Us</Link>
         <Link to="/cart" className='cursor-pointer text-decoration-none color-inherit'>Cart({ cartItems.length })</Link>
         <Link to="/instamart" className='cursor-pointer text-decoration-none color-inherit'>Instamart</Link>
-        <div className="text-blue-700">{userName}</div>
+        { isNotNullOrEmpty(userName) &&  <div className="text-blue-700">{userName}</div>}
         <Button type="dashed" onClick={toggleBtnName}>
-          {btnName}
+          {loginButton}
         </Button>
       </div>
     </section>

@@ -37,3 +37,13 @@ export interface RestaurantMenuProps {
 export interface CartState {
   items: SubMenu[];
 }
+
+export interface LoginForm {
+  username?: string;
+  password?: string;
+}
+
+export interface LoginButtonContextType {
+  loginButton: string;
+  setLoginButton?: Function;
+}
