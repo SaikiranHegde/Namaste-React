@@ -7,7 +7,7 @@ import { isNotNullOrEmpty, isNilOrEmpty } from "../utils/util";
 import { delay, of } from "rxjs";
 import { Input } from 'antd';
 import { Link } from "react-router-dom";
-import { useAppOnline } from "../utils/useAppOnline";
+import { useAppOnline } from "../hooks/useAppOnline";
 import Loader from "./Loader";
 import { RestaurantData } from "../types/types";
 const { Search } = Input;
