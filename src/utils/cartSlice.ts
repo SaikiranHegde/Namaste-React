@@ -9,11 +9,11 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<SubMenu>) => {
-      // RTX internally uses ImmerJS
+    addItem: (state: CartState, action: PayloadAction<SubMenu>) => {
+      // RTK internally uses ImmerJS
       state.items.push(action.payload);
     },
-    removeItem: (state, action) => {
+    removeItem: (state) => {
       state.items.pop();
     },
     clearCart: (state) => {
